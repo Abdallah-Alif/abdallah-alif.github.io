@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdullah Alif | Physics Portfolio</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+
+    <style>
+        :root {
+            --bg: #050505;
+            --accent: #38bdf8;
+            --text-dim: #94a3b8;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        body { 
+            background: var(--bg); color: #fff; 
+            font-family: 'Inter', -apple-system, system-ui, sans-serif; 
+            overflow-x: hidden; line-height: 1.4;
+        }
+
+        #canvas-env { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
+
+        /* HEADER: Elite Minimalist */
+        nav {
+            padding: 1rem 8%; display: flex; justify-content: space-between; align-items: center;
+            backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+            position: sticky; top: 0; z-index: 100;
+        }
+        .logo { font-weight: 800; font-family: monospace; font-size: 0.9rem; letter-spacing: 1px; }
+        .logo span { color: var(--accent); }
+        
+        .nav-links { display: flex; gap: 1.5rem; }
+        .nav-links a { 
+            text-decoration: none; color: var(--text-dim); font-size: 0.75rem; 
+            font-weight: 600; text-transform: uppercase; transition: 0.2s;
+        }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* HERO: Impactful Typography */
+        .hero { min-height: 85vh; display: flex; flex-direction: column; justify-content: center; padding: 0 8%; }
+        .badge { 
+            display: inline-block; padding: 4px 12px; border: 1px solid var(--accent);
+            color: var(--accent); font-family: monospace; font-size: 0.65rem; 
+            margin-bottom: 2rem; width: fit-content;
+        }
+        h1 { font-size: clamp(3rem, 12vw, 8rem); font-weight: 900; letter-spacing: -0.05em; line-height: 0.8; margin-bottom: 2rem; }
+        .sub { font-size: clamp(1rem, 2vw, 1.5rem); color: var(--text-dim); max-width: 600px; font-weight: 400; }
+
+        /* CONTENT GRID */
+        .section-label { padding: 4rem 8% 1.5rem; font-size: 0.6rem; letter-spacing: 0.4em; color: var(--accent); text-transform: uppercase; }
+        
+        .bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; padding: 0 8% 4rem; }
+        .card { 
+            background: var(--glass); border: 1px solid var(--border); 
+            padding: 2.5rem; border-radius: 4px; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+        .wide { grid-column: span 2; }
+        .card h3 { font-size: 1.1rem; margin-bottom: 1rem; color: #fff; }
+        .card p { color: var(--text-dim); font-size: 0.9rem; line-height: 1.6; }
+
+        /* MATH PANEL */
+        .math-hero { 
+            margin: 0 8% 4rem; background: #000; border: 1px solid var(--accent);
+            padding: 6rem 1rem; text-align: center; position: relative; overflow: hidden;
+        }
+        #math-target { font-size: clamp(1.4rem, 4vw, 2.8rem); color: var(--accent); }
+
+        /* CREDENTIALS */
+        .cred-bar { margin: 0 8% 6rem; display: flex; flex-wrap: wrap; gap: 0.8rem; }
+        .cred-item { 
+            flex: 1; min-width: 250px; padding: 1.5rem; border: 1px solid var(--border);
+            text-decoration: none; display: flex; justify-content: space-between; align-items: center;
+            background: var(--glass); transition: 0.2s;
+        }
+        .cred-item:hover { border-color: var(--accent); }
+        .cred-item span { font-size: 0.8rem; color: #fff; font-weight: 500; }
+        .cred-item i { color: var(--accent); font-size: 0.7rem; font-family: monospace; }
+
+        /* MOBILE OPTIMIZATION */
+        @media (max-width: 800px) {
+            nav { padding: 1.2rem 5%; }
+            .hero { padding: 0 5%; text-align: center; align-items: center; }
+            .bento { grid-template-columns: 1fr; padding: 0 5% 2rem; }
+            .wide { grid-column: span 1; }
+            .math-hero, .cred-bar, .section-label { margin-left: 5%; margin-right: 5%; }
+            .nav-links { gap: 0.8rem; }
+            .nav-links a { font-size: 0.65rem; }
+        }
+
+        footer { 
+            padding: 4rem 8%; border-top: 1px solid var(--border); 
+            display: flex; justify-content: space-between; align-items: center;
+            color: var(--text-dim); font-size: 0.7rem;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas-env"></canvas>
+
+    <nav>
+        <div class="logo">A.ALIF<span> // 2027</span></div>
+        <div class="nav-links">
+            <a href="mailto:your.email@gmail.com">Email</a>
+            <a href="https://linkedin.com/in/abdullah-alif" target="_blank">LinkedIn</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="badge">NATIONAL PHYSICS OLYMPIAD WINNER</div>
+            <h1>ABDULLAH ALIF</h1>
+            <p class="sub">Dhaka College '26 | Researcher focusing on the mathematical formalisms of classical and orbital mechanics.</p>
+        </section>
+
+        <h2 class="section-label">Academic Provenance</h2>
+        <section class="bento">
+            <div class="card wide">
+                <h3>Theoretical Mentorship</h3>
+                <p>Collaborating with PhD faculty at Dhaka College to investigate Lagrangian derivations. Letter of Recommendation confirms advanced proficiency in non-inertial reference frames and calculus-based physics.</p>
+            </div>
+            <div class="card">
+                <h3>Dhaka College</h3>
+                <p>Enrolled in Bangladesh's premier STEM institution. Maintaining an elite trajectory for international admissions.</p>
+            </div>
+            <div class="card">
+                <h3>Olympiad Path</h3>
+                <p>3-year progression from Regional Top Scorer to National Participation, culminating in a National Winner award.</p>
+            </div>
+            <div class="card wide">
+                <h3>Computational Mechanics</h3>
+                <p>Simulating gravitational n-body interactions using Python and C++. Applying numerical methods to solve differential equations in orbital decay scenarios.</p>
+            </div>
+        </section>
+
+        <h2 class="section-label">Mathematical Formalism</h2>
+        <section class="math-hero">
+            <div id="math-target"></div>
+        </section>
+
+        <h2 class="section-header section-label">Verified Archive</h2>
+        <section class="cred-bar">
+            <a href="docs/BDPhO_Consolidated.pdf" class="cred-item" target="_blank">
+                <span>Physics Olympiad Record</span>
+                <i>[VIEW_ARCHIVE]</i>
+            </a>
+            <a href="docs/PhD_Recommendation.pdf" class="cred-item" target="_blank">
+                <span>Faculty Recommendation</span>
+                <i>[VERIFIED_PDF]</i>
+            </a>
+            <a href="docs/Transcript_SSC.pdf" class="cred-item" target="_blank">
+                <span>SSC Transcript</span>
+                <i>[OFFICIAL_SCAN]</i>
+            </a>
+        </section>
+    </main>
+
+    <footer>
+        <div>© 2026 Abdullah Alif</div>
+        <div>MECHANICS • ELECTROSTATICS • ELECTRODYNAMICS • OPTICS</div>
+    </footer>
+
+    <script>
+        // High-Resolution Math Rendering
+        window.onload = function() {
+            katex.render("\\mathcal{S} = \\int_{t_1}^{t_2} L(q, \\dot{q}, t) \\, dt", document.getElementById("math-target"), {
+                throwOnError: false
+            });
+        };
+
+        // Professional Physics Background Particle System
+        const canvas = document.getElementById('canvas-env');
+        const ctx = canvas.getContext('2d');
+        let pts = [];
+
+        function init() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            pts = [];
+            let count = window.innerWidth < 800 ? 30 : 70;
+            for(let i=0; i<count; i++) {
+                pts.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.4,
+                    vy: (Math.random() - 0.5) * 0.4
+                });
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'rgba(56, 189, 248, 0.3)';
+            ctx.strokeStyle = 'rgba(56, 189, 248, 0.08)';
+            pts.forEach((p, i) => {
+                p.x += p.vx; p.y += p.vy;
+                if(p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if(p.y < 0 || p.y > canvas.height) p.vy *= -1;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 1.2, 0, Math.PI*2);
+                ctx.fill();
+                for(let j=i+1; j<pts.length; j++) {
+                    let d = Math.sqrt((p.x-pts[j].x)**2 + (p.y-pts[j].y)**2);
+                    if(d < 200) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(pts[j].x, pts[j].y);
+                        ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(draw);
+        }
+        init(); draw();
+        window.onresize = init;
+    </script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Projectile Dynamics Research Notes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="research.html">Research</a></li>
+            <li><a href="notes.html" class="active">Notes</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <header>
+            <h1>Projectile Dynamics Research Notes</h1>
+        </header>
+
+        <section>
+            <h2>1. Notation</h2>
+            <ul>
+                <li><strong>r(t)</strong>: position vector</li>
+                <li><strong>v(t)</strong>: velocity</li>
+                <li><strong>m</strong>: mass</li>
+                <li><strong>A</strong>: cross-sectional area</li>
+                <li><strong>C_D</strong>: drag coefficient</li>
+                <li><strong>Ω</strong>: Earth's angular velocity vector</li>
+                <li><strong>R_E</strong>: Earth radius</li>
+                <li><strong>ρ_a(h)</strong>: atmospheric density at altitude h</li>
+                <li><strong>ρ_p</strong>: projectile density</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>2. Core Equation & Its Omitted Terms</h2>
+            
+            <h3>Ideal equation</h3>
+            <div class="equation-box">
+                $$ m \, \ddot{r} = - m g \hat{y} $$
+            </div>
+
+            <h3>Complete physical equation (classical)</h3>
+            
+            <div class="equation-box">
+                $$ m \, \ddot{r} = - m g(h) \hat{r} + F_a + F_m + F_c + F_\nabla + F_s $$
+            </div>
+
+            <h3>Force Definitions</h3>
+            
+            <p><strong>Aerodynamic drag:</strong></p>
+            <div class="equation-box">
+                $$ F_a = -\frac{1}{2} \rho_a C_D A |v_r| v_r $$
+            </div>
+
+            <p><strong>Magnus lift (simplified):</strong></p>
+            <div class="equation-box">
+                $$ F_m = \frac{1}{2} \rho_a C_L A |\omega| (\omega \times v_r) $$
+            </div>
+
+            <p><strong>Coriolis + centrifugal:</strong></p>
+            <div class="equation-box">
+                $$ F_c = - 2 m (\Omega \times \dot{r}) - m (\Omega \times (\Omega \times r)) $$
+            </div>
+
+            <p><strong>Altitude-dependent gravity:</strong></p>
+            <div class="equation-box">
+                $$ g(h) = g_0 \left( \frac{R_E}{R_E + h} \right)^2, \quad h = y \text{ (for flat approximation)} $$
+            </div>
+
+            <p><strong>Tidal and stochastic forces:</strong></p>
+            <div class="equation-box">
+                $$ F_\nabla = - m (\nabla \Phi_\text{tidal}) \quad \text{(neglected)} $$
+                $$ F_s \quad \text{(stochastic turbulence forces)} $$
+            </div>
+        </section>
+
+        <section>
+            <h2>3. Order-of-Magnitude Analysis for Dominant Perturbations</h2>
+
+            <h3>3.1 Aerodynamic Drag Breakdown</h3>
+            <p>Drag-to-weight ratio:</p>
+            <div class="equation-box">
+                $$ \epsilon_d = \frac{F_d}{mg} = \frac{\rho_a C_D A v^2}{2 m g} $$
+            </div>
+            <p>For a sphere:</p>
+            <div class="equation-box">
+                $$ \epsilon_d = \frac{3}{4} \frac{\rho_a}{\rho_p} \frac{C_D v^2}{g d} $$
+            </div>
+            <p>Failure onset: $$ \epsilon_d \gtrsim 0.01 $$</p>
+            <p>Example: $$ \rho_p / \rho_a \sim 10^3, \, d \sim 0.01 \, m \implies v \gtrsim 30 \, \text{m/s} $$</p>
+
+            <p>Drag coefficient dependency:</p>
+            <div class="equation-box">
+                $$ C_D \approx \frac{24}{Re} \left( 1 + 0.15 Re^{0.687} \right), \quad Re < 800 $$
+                $$ Re = \frac{\rho_a v d}{\mu} $$
+            </div>
+            <p>Transonic issues near $$ Ma \approx 0.6 $$</p>
+
+            <h3>3.2 Coriolis Deviation</h3>
+            <p>Horizontal acceleration magnitude:</p>
+            <div class="equation-box">
+                $$ a_c \sim 2 \Omega v \sin\phi $$
+            </div>
+            <p>Lateral displacement over flight time \( t_f \):</p>
+            <div class="equation-box">
+                $$ \delta x_c \sim \frac{1}{3} \Omega \sin\phi \, v_x t_f^2 $$
+            </div>
+            <p>Example: $$ v_x = 200 \, \text{m/s}, t_f = 50\,\text{s}, \phi = 45^\circ \implies \delta x_c \sim 8.6\,\text{m} $$</p>
+
+            <h3>3.3 Altitude-Dependent Gravity & Curvature</h3>
+            <p>Vertical error from constant gravity assumption:</p>
+            <div class="equation-box">
+                $$ \delta y_g \sim \frac{1}{3} g_0 \frac{t^3 v_{y0}}{R_E} $$
+            </div>
+            <p>Example: $$ v_{y0} \sim 500 \, \text{m/s}, t = 100\,\text{s} \implies \delta y_g \sim 1.1\,\text{m} $$</p>
+
+            <p>Earth curvature effect over horizontal range \( R \):</p>
+            <div class="equation-box">
+                $$ \delta y_R \approx \frac{R^2}{2 R_E} $$
+            </div>
+            <p>Example: $$ R = 30 \, \text{km} \implies \delta y_R \approx 70\,\text{m} $$</p>
+
+            <h3>3.4 Magnus Effect for Spinning Projectiles</h3>
+            <p>Simplified transverse force:</p>
+            <div class="equation-box">
+                $$ F_M = S (\omega \times v_r), \quad S \approx \frac{\pi}{8} \rho_a d^3 C_M $$
+            </div>
+            <p>Spin parameter: $$ S_p = \frac{2 v \omega d}{1} $$</p>
+            <p>Example: baseball $$ d = 0.074\,\text{m}, \omega \sim 200 \,\text{rad/s}, v = 40\,\text{m/s} \implies F_M \sim 0.4\,\text{N} $$</p>
+        </section>
+
+        <section>
+            <h2>4. Coupled Dynamics</h2>
+            <p>When drag and Magnus both present:</p>
+            <div class="equation-box">
+                $$ m \dot{v} = - m g \hat{y} - \frac{1}{2} \rho_a A C_D |v_r| v_r + S (\omega \times v_r) $$
+            </div>
+            <p>Spin decay:</p>
+            <div class="equation-box">
+                $$ I \dot{\omega} = - \kappa \rho_a d^5 |\omega| \omega $$
+            </div>
+            <p>Notes: System is coupled nonlinear ODEs. Separation of timescales can be applied if $$ \tau_\omega \gg t_f $$, otherwise likely chaotic for some initial conditions.</p>
+        </section>
+
+        <section>
+            <h2>5. Unresolved Technical Questions</h2>
+            <ul>
+                <li>Transonic Drag Parameterization: Can \( C_D(Ma, Re) \) be expressed as a universal function like \( Ma \cdot Re^{1/2} \) for non-spherical shapes?</li>
+                <li>Stochastic Atmospheric Modeling: For wind fluctuations \( \delta u(r,t) \) with spectrum \( E(k) \), what is \( \langle \delta r^2(t) \rangle \)? Can a Fokker-Planck approximation be used?</li>
+                <li>Boundary-Layer Interaction: Does rapid spin lower Re for turbulent transition? How does it affect \( C_M(S_p) \)?</li>
+                <li>Minimal Model for Bifurcations: Are there Hopf bifurcations producing oscillatory trajectories in 6D phase-space?</li>
+                <li>High-Altitude Rarefied Flow: For \( Kn > 0.1 \), can DSMC drag be approximated as \( F_d = -\frac{1}{2} \rho_a A v^2 [ C_D(0) + C_D(1) \cdot Kn + \dots ] \)?</li>
+                <li>Numerical Sensitivity: Does Lyapunov exponent scale as \( \lambda \sim v^\alpha d^\beta \) for deterministic prediction horizon?</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Abdullah Alif</p>
+    </footer>
+
+</body>
+</html>

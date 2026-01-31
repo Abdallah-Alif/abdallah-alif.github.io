@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Research Projects</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="research.html" class="active">Research</a></li>
+            <li><a href="notes.html">Notes</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <header>
+            <h1>Academic Research Projects</h1>
+            <p>Compilation of research on projectile motion and point-mass approximations in classical mechanics.</p>
+        </header>
+
+        <section id="project1">
+            <header>
+                <h2>Project 1: Limitations of the Ideal Projectile Model</h2>
+            </header>
+
+            <article>
+                <h3>Abstract</h3>
+                <p>
+                    Ideal projectile motion provides a tractable framework for analyzing ballistic trajectories, yet its simplifying assumptions restrict applicability across realistic regimes. This note delineates the principal physical domains where the model fails, emphasizing aerodynamic forces, rotational dynamics, non-inertial effects, gravitational non-uniformity, and atmospheric variability. Characteristic scaling arguments identify transition thresholds, while unresolved theoretical questions highlight the need for multi-physics coupling beyond the classical point-mass approximation.
+                </p>
+            </article>
+            
+            
+
+            <article>
+                <h3>Core Analysis</h3>
+                <p>
+                    The ideal projectile model assumes motion within an inertial frame under a constant gravitational field in a vacuum, treating the projectile as a point mass over a flat Earth. While analytically convenient, these assumptions progressively fail as characteristic length, time, and velocity scales increase.
+                </p>
+                <p>
+                    Aerodynamic forces are typically the earliest source of deviation. The drag acceleration scales as:
+                </p>
+                <div class="equation-box">
+                    $$ a_d \sim \frac{\rho_a C_D A v^2}{2m} $$
+                </div>
+                <p>
+                    where \(\rho_a\) is air density, \(C_D\) is the drag coefficient, \(A\) is the cross-sectional area, and \(m\) is the mass. Departure from ideal motion occurs when \(a_d \approx g\), defining a characteristic ballistic length scale \(L_c \sim m / (\rho_a C_D A)\).
+                </p>
+                <p>
+                    Finite size introduces rotational dynamics and lift-like forces. Spin produces a Magnus force scaling as \(F_M \sim \rho_a \omega v R^3\), affecting trajectories in sports and elongated/asymmetric projectiles. Non-inertial effects from Earth's rotation (Coriolis and centrifugal forces) also influence long-range trajectories. Gravitational non-uniformity, the flat-Earth approximation, and atmospheric heterogeneity further limit the model's applicability.
+                </p>
+            </article>
+
+            <details>
+                <summary>Assumptions of the Ideal Model</summary>
+                <div class="content">
+                    <ul>
+                        <li>Motion occurs in an inertial frame under constant gravity.</li>
+                        <li>The projectile is treated as a point mass.</li>
+                        <li>Air resistance and other environmental forces are ignored.</li>
+                        <li>The Earth is flat for trajectory calculations.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details>
+                <summary>Model Limitations & Breakdowns</summary>
+                <div class="content">
+                    <ul>
+                        <li>Breakdown under aerodynamic forces, rotation, and non-inertial effects.</li>
+                        <li>Geometric curvature and gravitational variations limit long-range accuracy.</li>
+                        <li>Atmospheric variability introduces stochastic effects.</li>
+                        <li>Requires multi-physics models for high-precision applications.</li>
+                    </ul>
+                </div>
+            </details>
+        </section>
+
+        <section id="project2">
+            <header>
+                <h2>Project 2: Breakdown of the Point Mass Approximation</h2>
+            </header>
+
+            <article>
+                <h3>Abstract</h3>
+                <p>
+                    The point mass approximation underpins much of classical mechanics but fails in non-ideal systems where spatial extent, internal dynamics, and interaction structures influence motion. This note analyzes breakdown mechanisms arising from finite geometry, internal–external coupling, long-range field gradients, dissipation, relativistic causality, and scale-dependent accumulation. Emphasis is placed on identifying physical regimes where center-of-mass dynamics remain valid yet predictively incomplete.
+                </p>
+            </article>
+
+            <article>
+                <h3>Core Analysis</h3>
+                <p>
+                    The point mass approximation models a body as possessing mass but no spatial extent, reducing its mechanical description to the trajectory of a single coordinate. While often sufficient for translational dynamics in weakly varying force fields, this abstraction omits geometric, internal, and interaction-dependent effects.
+                </p>
+                <p>
+                    Finite-size kinematics cause failure in confined or curved geometries, where distributed contacts affect translational and rotational motion. Internal-external dynamics coupling produces phase lags and history-dependent behavior. Long-range interaction fields, dissipative environments, and relativistic effects further challenge the point-mass framework. Even small finite-size effects accumulate over time, highlighting scale-dependence in approximation validity.
+                </p>
+            </article>
+
+            <details>
+                <summary>Approximation Assumptions</summary>
+                <div class="content">
+                    <ul>
+                        <li>Mass is localized at a single point with zero spatial extent.</li>
+                        <li>Internal degrees of freedom are absent or dynamically irrelevant.</li>
+                        <li>External forces act effectively at one point.</li>
+                        <li>Rotational dynamics can be ignored or treated independently.</li>
+                        <li>Internal equilibration occurs faster than external motion.</li>
+                        <li>Material properties do not influence translational dynamics.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details>
+                <summary>Open Questions & Limitations</summary>
+                <div class="content">
+                    <ul>
+                        <li>Identifying dimensionless parameters for internal–external coupling significance.</li>
+                        <li>Deriving effective center-of-mass equations with memory effects.</li>
+                        <li>Foundations of macroscopic friction laws from microscopic dynamics.</li>
+                        <li>Finite-size requirements for consistent relativistic self-force models.</li>
+                        <li>Correspondence between classical finite-size breakdown and quantum dynamics.</li>
+                    </ul>
+                </div>
+            </details>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Academic Research Compilation</p>
+    </footer>
+
+</body>
+</html>

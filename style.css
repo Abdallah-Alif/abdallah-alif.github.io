@@ -1,197 +1,287 @@
-/* style.css */
+/* MIT PHYSICS ACADEMIC THEME - NATIVE PRINT EDITION
+   Design: Minimalist, Content-First, Vector-Perfect
+*/
 
-/* --- Variables & Reset --- */
 :root {
-    --bg-color: #ffffff;
-    --text-primary: #111111;
-    --text-secondary: #444444;
-    --accent-color: #8b0000; /* "MIT Red" inspired deep cardinal */
-    --border-color: #dddddd;
-    --bg-highlight: #f8f9fa;
-    --font-heading: Georgia, "Times New Roman", Times, serif;
-    --font-body: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    --font-mono: "Courier Prime", "Courier New", monospace;
-    --spacing-unit: 1.5rem;
+    /* Academic Palette */
+    --bg-canvas: #ffffff;
+    --text-primary: #0a0a0a;     /* Near Black */
+    --text-body: #222222;        /* High Contrast Grey */
+    --text-meta: #555555;
+    --link-academic: #003366;    /* Oxford/Academic Blue */
+    --border-subtle: #eeeeee;
+    --border-strong: #dddddd;
+
+    /* Typography - Screen */
+    --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-serif: "Georgia", "Times New Roman", Times, serif;
+    
+    /* Layout Dimensions */
+    --read-width: 760px;
+    --nav-height: 80px;
 }
 
-* { box-sizing: border-box; }
+/* --- RESET & BASE --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
 
 body {
-    margin: 0;
-    padding: 0;
-    font-family: var(--font-body);
-    color: var(--text-primary);
-    background-color: var(--bg-color);
-    line-height: 1.7; /* Increased for academic readability */
+    background-color: var(--bg-canvas);
+    color: var(--text-body);
+    font-family: var(--font-sans);
+    font-size: 18px; 
+    line-height: 1.75;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 
-/* --- Layout Wrappers --- */
-.container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 20px 60px 20px;
-}
-
-/* --- Typography --- */
-h1, h2, h3 {
-    font-family: var(--font-heading);
-    color: var(--text-primary);
-    font-weight: 700;
-    margin-top: 2.5em;
-    margin-bottom: 0.75em;
-    line-height: 1.2;
-}
-
-h1 { 
-    font-size: 2.5rem; 
-    border-bottom: 2px solid var(--text-primary);
-    padding-bottom: 0.2em;
-    margin-top: 1em;
-}
-h2 { font-size: 1.75rem; }
-h3 { font-size: 1.3rem; color: var(--text-secondary); }
-
-p { margin-bottom: 1.5em; color: var(--text-secondary); }
-
-a {
-    color: var(--accent-color);
-    text-decoration: none;
-    border-bottom: 1px dotted var(--accent-color);
-    transition: all 0.2s ease;
-}
-a:hover { background-color: rgba(139, 0, 0, 0.05); border-bottom-style: solid; }
-
-/* --- Navigation --- */
+/* --- NAVIGATION --- */
 nav {
-    border-bottom: 1px solid var(--border-color);
-    padding: 1rem 0;
     position: sticky;
     top: 0;
-    background: rgba(255,255,255,0.95);
-    backdrop-filter: blur(5px);
-    z-index: 100;
-}
-
-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    background: rgba(255, 255, 255, 0.98);
+    border-bottom: 1px solid var(--border-subtle);
+    height: var(--nav-height);
+    z-index: 1000;
     display: flex;
-    justify-content: center;
-    gap: 2rem;
-    font-family: var(--font-body);
-    font-weight: 500;
+    align-items: center;
 }
 
-nav a {
-    color: var(--text-secondary);
-    border: none;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    letter-spacing: 0.05em;
-}
-
-nav a.active {
-    color: var(--accent-color);
-    font-weight: 700;
-}
-
-/* --- Research & Notebook Components --- */
-
-/* Project Cards */
-section[id^="project"] {
-    margin-bottom: 4rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid var(--border-color);
-}
-
-/* Collapsible Details (Assumptions/Limitations) */
-details {
-    background-color: var(--bg-highlight);
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    margin: 1.5em 0;
-    overflow: hidden;
-}
-
-summary {
-    padding: 1rem;
-    cursor: pointer;
-    font-weight: bold;
-    font-family: var(--font-heading);
-    background-color: #f1f1f1;
-    list-style: none; /* Hide default triangle in some browsers */
+.nav-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-summary::after {
-    content: "+";
-    font-weight: bold;
+.site-identity {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    text-decoration: none;
 }
 
-details[open] summary::after {
-    content: "-";
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-meta);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
 }
 
-details[open] summary {
-    border-bottom: 1px solid var(--border-color);
+.nav-links a:hover, .nav-links a.active { color: var(--link-academic); }
+
+/* --- GLOBAL LAYOUT --- */
+.container {
+    max-width: var(--read-width);
+    margin: 0 auto;
+    padding: 4rem 1.5rem 8rem 1.5rem;
 }
 
-details .content {
-    padding: 1.5rem;
+.fade-in { animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(10px); }
+@keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+
+/* --- TYPOGRAPHY --- */
+h1, h2, h3 {
+    font-family: var(--font-serif);
+    color: var(--text-primary);
+    font-weight: normal;
 }
 
-/* Equation Boxes */
-.equation-box {
-    background: var(--bg-highlight);
-    border-left: 4px solid var(--accent-color);
-    padding: 1.5rem;
+h1 { font-size: 2.8rem; margin-bottom: 1.5rem; letter-spacing: -0.02em; line-height: 1.2; }
+h2 { font-size: 1.8rem; margin-top: 4rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.5rem; }
+h3 { font-size: 1.3rem; margin-top: 2.5rem; margin-bottom: 1rem; font-weight: 600; }
+
+p { margin-bottom: 1.5rem; text-align: justify; }
+ul, ol { margin-bottom: 1.5rem; margin-left: 1.5rem; }
+li { margin-bottom: 0.5rem; }
+
+/* --- ACADEMIC COMPONENTS --- */
+.abstract-box {
+    margin: 2.5rem 0;
+    padding: 2rem;
+    background: #fafafa;
+    border-left: 3px solid var(--link-academic);
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--text-meta);
+}
+
+.math-block {
     margin: 2rem 0;
-    font-family: var(--font-heading); /* Serif makes math look better */
     overflow-x: auto;
-}
-
-.equation-box p { margin: 0.5em 0; color: #222; }
-
-/* Code Snippets */
-pre {
-    background: #222;
-    color: #eee;
-    padding: 1rem;
-    border-radius: 4px;
-    overflow-x: auto;
-    font-family: var(--font-mono);
-    font-size: 0.9rem;
-}
-
-/* Footer */
-footer {
     text-align: center;
-    padding: 4rem 0;
-    color: #888;
-    font-size: 0.9rem;
-    border-top: 1px solid var(--border-color);
-    margin-top: 4rem;
+    font-family: "Times New Roman", serif;
 }
 
-/* --- Responsive Design --- */
-@media (max-width: 768px) {
-    .container { padding: 0 15px; }
-    h1 { font-size: 2rem; }
-    nav ul { gap: 1rem; font-size: 0.8rem; }
+.meta-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-subtle);
 }
 
-/* --- Print Friendly --- */
+.label-text {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-meta);
+}
+
+.btn-action {
+    background: transparent;
+    border: 1px solid var(--border-strong);
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border-radius: 3px;
+    font-family: var(--font-sans);
+    transition: all 0.2s;
+}
+
+.btn-action:hover {
+    border-color: var(--link-academic);
+    color: var(--link-academic);
+    background: #f8faff;
+}
+
+/* --- NOTES LIBRARY STRUCTURE --- */
+.library-layout {
+    display: flex;
+    gap: 4rem;
+    margin-top: 2rem;
+}
+
+.library-sidebar {
+    width: 250px;
+    flex-shrink: 0;
+    border-right: 1px solid var(--border-subtle);
+    padding-right: 2rem;
+}
+
+.sidebar-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 0.8rem 0;
+    font-size: 0.95rem;
+    color: var(--text-meta);
+    cursor: pointer;
+    font-family: var(--font-sans);
+    transition: color 0.2s;
+    border-bottom: 1px solid transparent;
+}
+
+.sidebar-btn:hover { color: var(--link-academic); }
+.sidebar-btn.active { 
+    color: var(--text-primary); 
+    font-weight: 600; 
+    border-left: 3px solid var(--link-academic); 
+    padding-left: 10px;
+}
+
+.library-content { flex-grow: 1; }
+.note-entry { display: none; }
+.note-entry.active { display: block; animation: fadeIn 0.5s ease; }
+
+/* --- RESPONSIVE --- */
+@media (max-width: 850px) {
+    .library-layout { flex-direction: column; }
+    .library-sidebar { 
+        width: 100%; 
+        border-right: none; 
+        border-bottom: 1px solid var(--border-subtle); 
+        padding-bottom: 1.5rem; 
+        margin-bottom: 2rem;
+    }
+}
+
+/* ==========================================================================
+   NATIVE BROWSER PRINT ENGINE (CRITICAL)
+   This CSS takes over when window.print() is called.
+   ========================================================================== */
+
 @media print {
-    nav, footer { display: none; }
-    body, .container { width: 100%; margin: 0; padding: 0; }
-    details { display: block !important; border: none; } 
-    details[open] summary { border: none; }
-    summary { display: none; } /* Hide the click trigger, show content */
-    .content { display: block !important; padding: 0; }
+    /* 1. Page Setup */
+    @page {
+        size: A4 portrait;
+        margin: 25mm; /* Standard Academic Margins */
+    }
+
+    /* 2. Reset Layout for Paper */
+    body {
+        background: white;
+        color: black;
+        font-family: "Times New Roman", Times, serif; /* Force Serif */
+        font-size: 11.5pt; /* Standard Journal Size */
+        line-height: 1.6;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* 3. Hide UI Elements */
+    nav, 
+    .library-sidebar, 
+    .btn-action, 
+    footer,
+    .label-text { 
+        display: none !important; 
+    }
+
+    /* 4. Content Isolation Logic 
+       We only show the article that has the .print-target class
+    */
+    body.is-printing > * { display: none; } /* Hide all body children... */
+    body.is-printing main { display: block !important; margin: 0 !important; padding: 0 !important; } /* ...except main */
+    
+    main > * { display: none; } /* Hide all articles... */
+    .note-entry.print-target, 
+    article.print-target { 
+        display: block !important; 
+        position: static !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* 5. Typography & Spacing Fixes */
+    h1 { font-size: 24pt; text-align: center; margin-bottom: 24pt; color: black; }
+    h2 { font-size: 16pt; margin-top: 24pt; border-bottom: 1px solid #000; color: black; page-break-after: avoid; }
+    h3 { font-size: 13pt; margin-top: 18pt; color: black; page-break-after: avoid; }
+    p { text-align: justify; widows: 3; orphans: 3; }
     a { text-decoration: none; color: black; }
-    .equation-box { border-left: 1px solid #000; background: none; }
+
+    /* 6. Abstract Specifics */
+    .abstract-box {
+        border: none;
+        background: none;
+        padding: 0 40pt;
+        font-size: 10.5pt;
+        margin-bottom: 30pt;
+    }
+
+    /* 7. MATH PROTECTION RULES */
+    .math-block, mjx-container {
+        page-break-inside: avoid !important;
+        margin: 18pt 0 !important;
+    }
+    
+    /* Ensure inline math doesn't overlap lines */
+    mjx-container[jax="CHTML"][display="true"] { 
+        margin: 1em 0 !important; 
+    }
 }

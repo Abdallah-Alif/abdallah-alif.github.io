@@ -46,6 +46,7 @@ nav {
     z-index: 1000;
     display: flex;
     align-items: center;
+    transition: all 0.3s ease; /* Added for smooth resizing on mobile */
 }
 
 .nav-container {
@@ -197,8 +198,9 @@ li { margin-bottom: 0.5rem; }
 .note-entry { display: none; }
 .note-entry.active { display: block; animation: fadeIn 0.5s ease; }
 
-/* --- RESPONSIVE --- */
+/* --- RESPONSIVE & MOBILE OPTIMIZATION --- */
 @media (max-width: 850px) {
+    /* 1. LIBRARY LAYOUT FIX */
     .library-layout { flex-direction: column; }
     .library-sidebar { 
         width: 100%; 
@@ -206,6 +208,41 @@ li { margin-bottom: 0.5rem; }
         border-bottom: 1px solid var(--border-subtle); 
         padding-bottom: 1.5rem; 
         margin-bottom: 2rem;
+    }
+
+    /* 2. NAVIGATION BAR FIX (Mobile/Tablet) */
+    nav {
+        height: auto; /* Allow height to expand */
+        padding: 1rem 0;
+    }
+
+    .nav-container {
+        flex-direction: column; /* Stack logo and links */
+        gap: 1rem;
+    }
+
+    .site-identity {
+        width: 100%;
+        text-align: center;
+        padding-bottom: 0.8rem;
+        border-bottom: 1px solid var(--border-subtle);
+        margin-bottom: 0.5rem;
+    }
+
+    .nav-links {
+        width: 100%;
+        justify-content: center; /* Center the links */
+        gap: 1.5rem;
+        flex-wrap: wrap; /* Allow wrapping on very small screens */
+    }
+
+    .nav-links li {
+        margin-bottom: 0;
+    }
+
+    .nav-links a {
+        font-size: 0.95rem; /* Slightly larger hit area for touch */
+        padding: 0.5rem;
     }
 }
 

@@ -2,168 +2,245 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Projectile Dynamics Research Notes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes Library | Abdullah Alif</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
     <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="research.html">Research</a></li>
-            <li><a href="notes.html" class="active">Notes</a></li>
-        </ul>
+        <div class="nav-container">
+            <a href="index.html" class="site-identity">A. ALIF / RESEARCH</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Overview</a></li>
+                <li><a href="research.html">Publications</a></li>
+                <li><a href="notes.html" class="active">Notes Library</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <main class="container">
+    <main class="container fade-in" style="max-width: 1000px;">
         <header>
-            <h1>Projectile Dynamics Research Notes</h1>
+            <h1 style="margin-bottom: 0.5rem;">Physics Notes Library</h1>
+            <p style="font-size: 1.1rem; color: var(--text-meta);">
+                Derivations, framework definitions, and problem-solving heuristics.
+            </p>
         </header>
 
-        <section>
-            <h2>1. Notation</h2>
-            <ul>
-                <li><strong>r(t)</strong>: position vector</li>
-                <li><strong>v(t)</strong>: velocity</li>
-                <li><strong>m</strong>: mass</li>
-                <li><strong>A</strong>: cross-sectional area</li>
-                <li><strong>C_D</strong>: drag coefficient</li>
-                <li><strong>Ω</strong>: Earth's angular velocity vector</li>
-                <li><strong>R_E</strong>: Earth radius</li>
-                <li><strong>ρ_a(h)</strong>: atmospheric density at altitude h</li>
-                <li><strong>ρ_p</strong>: projectile density</li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>2. Core Equation & Its Omitted Terms</h2>
+        <div class="library-layout">
             
-            <h3>Ideal equation</h3>
-            <div class="equation-box">
-                $$ m \, \ddot{r} = - m g \hat{y} $$
-            </div>
+            <aside class="library-sidebar">
+                <span class="label-text" style="display:block; margin-bottom:1rem;">Table of Contents</span>
+                <button class="sidebar-btn active" onclick="switchNote('note-rocket')">1. Classical Rocket Dynamics</button>
+                <button class="sidebar-btn" onclick="switchNote('note-projectile')">2. Projectile Dynamics Research Notes</button>
+                </aside>
 
-            <h3>Complete physical equation (classical)</h3>
-            
-            <div class="equation-box">
-                $$ m \, \ddot{r} = - m g(h) \hat{r} + F_a + F_m + F_c + F_\nabla + F_s $$
-            </div>
+            <section class="library-content">
+                
+                <article id="note-rocket" class="note-entry active">
+                    <div class="meta-header">
+                        <span class="label-text">Derivation Note</span>
+                        <button class="btn-action" onclick="printArticle('note-rocket')">Download PDF</button>
+                    </div>
 
-            <h3>Force Definitions</h3>
-            
-            <p><strong>Aerodynamic drag:</strong></p>
-            <div class="equation-box">
-                $$ F_a = -\frac{1}{2} \rho_a C_D A |v_r| v_r $$
-            </div>
+                    <h2 style="margin-top:0; border:none;">CLASSICAL ROCKET DYNAMICS</h2>
 
-            <p><strong>Magnus lift (simplified):</strong></p>
-            <div class="equation-box">
-                $$ F_m = \frac{1}{2} \rho_a C_L A |\omega| (\omega \times v_r) $$
-            </div>
+                    <h3>I. FUNDAMENTAL DERIVATION FROM MOMENTUM CONSERVATION</h3>
+                    <p><strong>System Definition:</strong><br>
+                    Rocket + contained propellant as isolated system in inertial frame.<br>
+                    \(m(t)\): Instantaneous total mass.<br>
+                    \(v(t)\): Rocket velocity vector relative to inertial frame.<br>
+                    \(u\): Constant exhaust velocity magnitude relative to rocket frame (\(u > 0\)).<br>
+                    \(dm\): Infinitesimal mass ejected (\(dm < 0\) for rocket mass change).<br>
+                    \(dt\): Infinitesimal time interval.</p>
+                    
+                    <p><strong>Momentum Balance:</strong><br>
+                    At time \(t\): \( P(t) = m(t)v(t) \)<br>
+                    During \(dt\):<br>
+                    Rocket mass becomes: \(m + dm\)<br>
+                    Rocket velocity becomes: \(v + dv\)<br>
+                    Ejected mass: \(-dm\) (positive quantity)<br>
+                    Ejected mass velocity (inertial frame): \(v - u\hat{e}\), where \(\hat{e}\) is unit vector in exhaust direction.<br>
+                    Momentum at \(t + dt\):<br>
+                    \( P(t+dt) = (m+dm)(v+dv) + (-dm)(v - u\hat{e}) \)</p>
+                    
+                    <p><strong>Derivation (No External Forces):</strong><br>
+                    Assume no external forces initially (free space). Momentum conservation requires \(P(t) = P(t+dt)\).<br>
+                    Expand:<br>
+                    \( mv = mv + m\,dv + v\,dm + dm\,dv - v\,dm + u\hat{e}\,dm \)<br>
+                    Cancel \(mv\) and \(\pm v\,dm\):<br>
+                    \( 0 = m\,dv + dm\,dv + u\hat{e}\,dm \)<br>
+                    Neglect second-order term \(dm\,dv\):<br>
+                    Approximation 1: Continuum approximation valid for \(dm \to 0, dv \to 0\).<br>
+                    \( m\,dv = -u\hat{e}\,dm \)<br>
+                    Divide by \(m\) (nonzero):<br>
+                    \( dv = -u\hat{e}\,\frac{dm}{m} \)</p>
+                    
+                    <p><strong>Integration (Constant u, Fixed Direction):</strong><br>
+                    For 1D motion along \(\hat{e}\) direction:<br>
+                    \( \int_{v_i}^{v_f} dv = -u \int_{m_i}^{m_f} \frac{dm}{m} \)<br>
+                    \( \Delta v = v_f - v_i = u \ln\left(\frac{m_i}{m_f}\right) \)<br>
+                    This is the Tsiolkovsky Rocket Equation.</p>
 
-            <p><strong>Coriolis + centrifugal:</strong></p>
-            <div class="equation-box">
-                $$ F_c = - 2 m (\Omega \times \dot{r}) - m (\Omega \times (\Omega \times r)) $$
-            </div>
+                    <h3>II. INCLUSION OF EXTERNAL FORCES</h3>
+                    <p><strong>Modified Momentum Balance:</strong><br>
+                    With external force \(F_{ext}\), momentum change equals impulse:<br>
+                    \( P(t+dt) - P(t) = F_{ext}\,dt \)<br>
+                    Following similar derivation yields:<br>
+                    \( m \frac{dv}{dt} = -u\hat{e}\frac{dm}{dt} + F_{ext} \)</p>
+                    
+                    <p><strong>Specific Case: Vertical Ascent in Uniform g:</strong><br>
+                    \( F_{ext} = -mg\hat{j} \)<br>
+                    \( m \frac{dv}{dt} = -u \frac{dm}{dt} - mg \)<br>
+                    or<br>
+                    \( \frac{dv}{dt} = \frac{u}{m}\left(-\frac{dm}{dt}\right) - g \)<br>
+                    where \((-dm/dt) > 0\) is mass flow rate.<br>
+                    Thrust force: \(T = u \cdot (\text{mass flow rate})\).</p>
 
-            <p><strong>Altitude-dependent gravity:</strong></p>
-            <div class="equation-box">
-                $$ g(h) = g_0 \left( \frac{R_E}{R_E + h} \right)^2, \quad h = y \text{ (for flat approximation)} $$
-            </div>
+                    <h3>III. KEY APPROXIMATIONS AND THEIR DOMAINS OF VALIDITY</h3>
+                    <p><strong>1. Constant Exhaust Velocity \(u\)</strong><br>
+                    Assumption: Thermodynamic properties constant during burn.<br>
+                    Justification: Well-designed nozzles maintain near-constant chamber conditions.<br>
+                    Failure Modes: Pressure drop in tanks affecting chamber pressure; Regenerative cooling changing properties over time; Two-phase flow or combustion instability.</p>
+                    
+                    <p><strong>2. Continuous Mass Loss (\(dm\) infinitesimal)</strong><br>
+                    Assumption: Flow continuous at macroscopic scale.<br>
+                    Justification: Molecular flow rates \(\sim 10^{23}\) molecules/second for chemical rockets.<br>
+                    Failure Threshold: When number of molecules ejected per control interval \(N < 10^4\).<br>
+                    Implications: Stochastic thrust fluctuations become significant for Micro-propulsion (cold gas thrusters), Field emission electric propulsion, Pulsed plasma thrusters.</p>
+                    
+                    <p><strong>3. Instantaneous Exhaust Acceleration</strong><br>
+                    Assumption: Exhaust reaches velocity \(u\) instantaneously relative to rocket.<br>
+                    Physical Reality: Acceleration occurs over nozzle length \(L\) at characteristic time \(\tau \sim L/u_{exhaust}\).<br>
+                    Failure Condition: When rocket acceleration \(a_{rocket}\) satisfies \(a_{rocket} \cdot \tau\) comparable to \(u\).<br>
+                    Effect: Effective exhaust velocity reduced by \(\sim (a_{rocket} \cdot \tau)/u\).</p>
+                    
+                    <p><strong>4. Point Mass Rocket</strong><br>
+                    Assumption: All mass concentrated at center of mass.<br>
+                    Neglects: Fuel sloshing dynamics, Structural flexibility, Propellant distribution effects.<br>
+                    Coupling Becomes Significant When: Slosh natural frequencies match control bandwidth; Bending modes excited by thrust oscillations; Asymmetric mass distribution creates torque.</p>
+                    
+                    <p><strong>5. No External Forces (in basic derivation)</strong><br>
+                    Extension to: Gravity, drag, lift implemented as separate terms.<br>
+                    Atmospheric Drag Model:<br>
+                    \( F_{drag} = -\frac{1}{2}\rho(h)v^2 C_D A \hat{v} \)<br>
+                    with \(\rho(h) = \rho_0 \exp(-h/H)\).</p>
 
-            <p><strong>Tidal and stochastic forces:</strong></p>
-            <div class="equation-box">
-                $$ F_\nabla = - m (\nabla \Phi_\text{tidal}) \quad \text{(neglected)} $$
-                $$ F_s \quad \text{(stochastic turbulence forces)} $$
-            </div>
-        </section>
+                    <h3>IV. EXTENDED FORMULATIONS</h3>
+                    <p><strong>A. Gravity Turn (2D/3D Trajectory)</strong><br>
+                    For orbital insertion, rocket pitches over gradually. Equations in polar coordinates \((r, \theta)\):<br>
+                    \( m(\ddot{r} - r\dot{\theta}^2) = T \sin\phi - \frac{GMm}{r^2} - D \sin\gamma \)<br>
+                    \( m(r\ddot{\theta} + 2\dot{r}\dot{\theta}) = T \cos\phi - D \cos\gamma \)<br>
+                    where \(\phi\) is thrust angle, \(\gamma\) flight path angle.</p>
+                    
+                    <p><strong>B. Variable Exhaust Velocity</strong><br>
+                    If \(u\) depends on remaining mass \(u(m)\) (e.g., pressure-fed systems):<br>
+                    \( \Delta v = \int_{m_i}^{m_f} \frac{u(m)}{m}\,dm \)<br>
+                    For linear dependence \(u(m) = u_0 + \alpha(m - m_i)\):<br>
+                    \( \Delta v = u_0 \ln(m_i/m_f) + \alpha [(m_f - m_i) - m_i \ln(m_i/m_f)] \)</p>
+                    
+                    <p><strong>C. Relativistic Correction</strong><br>
+                    For \(u \to c\) or \(\Delta v \to c\):<br>
+                    \( \Delta v = c \tanh\left[\frac{u}{c} \ln\left(\frac{m_i}{m_f}\right)\right] \)<br>
+                    Photon rocket limit (\(u = c\)):<br>
+                    \( \frac{\Delta v}{c} = \frac{(m_i/m_f)^2 - 1}{(m_i/m_f)^2 + 1} \)</p>
 
-        <section>
-            <h2>3. Order-of-Magnitude Analysis for Dominant Perturbations</h2>
+                    <h3>V. OPEN QUESTIONS AND RESEARCH FRONTIERS</h3>
+                    <p><strong>1. Optimal Control Under Uncertainty</strong><br>
+                    Problem: Determine thrust profile that minimizes propellant consumption given stochastic atmospheric density variations, wind shear uncertainties, thrust magnitude variations.<br>
+                    Current Status: Deterministic solutions via Pontryagin's principle exist; stochastic optimal control remains computationally intensive with limited analytic insight.</p>
+                    
+                    <p><strong>2. Microscopic/Quantum Limits</strong><br>
+                    Question: At what scale does the continuum approximation fundamentally break down?<br>
+                    Specifics: For nano-satellites with colloidal thrusters, can classical rocket equation be modified to include discrete particle statistics? Does uncertainty principle impose fundamental limit on minimum impulse bit? How do quantum fluctuations in ejected particles affect trajectory certainty?</p>
+                    
+                    <p><strong>3. Coupled Dynamics Stability</strong><br>
+                    Problem: Characterize stability boundaries for coupled thrust vector control loops, sloshing fuel modes, structural bending modes, attitude dynamics.<br>
+                    Known: Linear analyses show parametric resonances possible.<br>
+                    Unknown: Nonlinear regime behavior, especially during rapid maneuvers.</p>
+                    
+                    <p><strong>4. Non-Ideal Exhaust Effects</strong><br>
+                    Questions: How does exhaust velocity distribution (non-monochromatic) affect net momentum transfer? For magnetoplasmadynamic thrusters with partially ionized exhaust, how does recombination affect effective \(u\)? What is the effect of exhaust plume impingement on spacecraft surfaces during proximity operations?</p>
+                    
+                    <p><strong>5. Alternative Conservation Formulations</strong><br>
+                    Exploration: Could rocket dynamics be reformulated using Energy methods including thermal losses? Hamiltonian mechanics with time-dependent mass? Continuum fluid dynamics with moving boundary (exhaust plume)?</p>
+                    
+                    <p><strong>6. Information-Theoretic Connections</strong><br>
+                    Speculative: Is there a formal connection between the rocket equation and information theory? The exponential mass requirement resembles exponential resource needs for error correction in noisy channels.</p>
 
-            <h3>3.1 Aerodynamic Drag Breakdown</h3>
-            <p>Drag-to-weight ratio:</p>
-            <div class="equation-box">
-                $$ \epsilon_d = \frac{F_d}{mg} = \frac{\rho_a C_D A v^2}{2 m g} $$
-            </div>
-            <p>For a sphere:</p>
-            <div class="equation-box">
-                $$ \epsilon_d = \frac{3}{4} \frac{\rho_a}{\rho_p} \frac{C_D v^2}{g d} $$
-            </div>
-            <p>Failure onset: $$ \epsilon_d \gtrsim 0.01 $$</p>
-            <p>Example: $$ \rho_p / \rho_a \sim 10^3, \, d \sim 0.01 \, m \implies v \gtrsim 30 \, \text{m/s} $$</p>
+                    <h3>VI. PRACTICAL CALCULATION EXAMPLES</h3>
+                    <p><strong>A. Single-Stage Performance</strong><br>
+                    Given: \(u = 3,000\) m/s, \(m_i/m_f = 4\)<br>
+                    \( \Delta v = 3000 \times \ln 4 \approx 4159 \) m/s</p>
+                    
+                    <p><strong>B. Two-Stage Optimization</strong><br>
+                    For equal \(u\) in both stages:<br>
+                    Optimal \(\Delta v\) distribution: \(\Delta v_1 = \Delta v_2 = \Delta v_{total}/2\)<br>
+                    Mass ratios: \(R_1 = R_2 = \exp(\Delta v_{total}/(2u))\)</p>
+                    
+                    <p><strong>C. Gravity Loss Estimate</strong><br>
+                    For vertical ascent at constant thrust-to-weight ratio \(\alpha = T/(m_0 g)\):<br>
+                    \( v_{loss} \approx g t_{burn} \left(1 - \frac{1}{\alpha} \frac{\ln \alpha}{\alpha - 1} \right) \)<br>
+                    For \(\alpha = 1.5\), approximately 30% of burn time spent overcoming gravity.</p>
 
-            <p>Drag coefficient dependency:</p>
-            <div class="equation-box">
-                $$ C_D \approx \frac{24}{Re} \left( 1 + 0.15 Re^{0.687} \right), \quad Re < 800 $$
-                $$ Re = \frac{\rho_a v d}{\mu} $$
-            </div>
-            <p>Transonic issues near $$ Ma \approx 0.6 $$</p>
+                    <h3>VII. NOTES FOR FURTHER INVESTIGATION</h3>
+                    <p>Numerical Implementation: Integrate coupled ODEs using adaptive time-stepping (e.g., RK45). Model atmospheric density with exponential decay: \(\rho(h) = \rho_0 \exp(-h/H)\). Include thrust vector control with actuator dynamics.<br>
+                    Experimental Validation Needed: Thrust noise measurements for micro-propulsion systems. High-acceleration exhaust dynamics (\(a_{rocket} > 1000\) m/s²). Coupled slosh-structure interaction during throttling.<br>
+                    Theoretical Gaps: Analytic solution for optimal ascent with exponential atmosphere. Closed-form stability criteria for coupled fuel slosh and attitude dynamics. Thermodynamic limits for \(u\) including finite-rate processes.</p>
+                </article>
 
-            <h3>3.2 Coriolis Deviation</h3>
-            <p>Horizontal acceleration magnitude:</p>
-            <div class="equation-box">
-                $$ a_c \sim 2 \Omega v \sin\phi $$
-            </div>
-            <p>Lateral displacement over flight time \( t_f \):</p>
-            <div class="equation-box">
-                $$ \delta x_c \sim \frac{1}{3} \Omega \sin\phi \, v_x t_f^2 $$
-            </div>
-            <p>Example: $$ v_x = 200 \, \text{m/s}, t_f = 50\,\text{s}, \phi = 45^\circ \implies \delta x_c \sim 8.6\,\text{m} $$</p>
+                <article id="note-projectile" class="note-entry">
+                    <div class="meta-header">
+                        <span class="label-text">Derivation Note</span>
+                        <button class="btn-action" onclick="printArticle('note-projectile')">Download PDF</button>
+                    </div>
 
-            <h3>3.3 Altitude-Dependent Gravity & Curvature</h3>
-            <p>Vertical error from constant gravity assumption:</p>
-            <div class="equation-box">
-                $$ \delta y_g \sim \frac{1}{3} g_0 \frac{t^3 v_{y0}}{R_E} $$
-            </div>
-            <p>Example: $$ v_{y0} \sim 500 \, \text{m/s}, t = 100\,\text{s} \implies \delta y_g \sim 1.1\,\text{m} $$</p>
+                    <h2 style="margin-top:0; border:none;">PROJECTILE DYNAMICS & AERODYNAMICS</h2>
 
-            <p>Earth curvature effect over horizontal range \( R \):</p>
-            <div class="equation-box">
-                $$ \delta y_R \approx \frac{R^2}{2 R_E} $$
-            </div>
-            <p>Example: $$ R = 30 \, \text{km} \implies \delta y_R \approx 70\,\text{m} $$</p>
+                    <h3>1. Notation & Core Equations</h3>
+                    <p><strong>r(t)</strong>: position vector, <strong>v(t)</strong>: velocity, <strong>m</strong>: mass.</p>
+                    <p><strong>Ideal equation:</strong></p>
+                    <div class="math-block">$$ m \, \ddot{r} = - m g \hat{y} $$</div>
+                    <p><strong>Complete physical equation (classical):</strong></p>
+                    <div class="math-block">$$ m \, \ddot{r} = - m g(h) \hat{r} + F_a + F_m + F_c + F_\nabla + F_s $$</div>
 
-            <h3>3.4 Magnus Effect for Spinning Projectiles</h3>
-            <p>Simplified transverse force:</p>
-            <div class="equation-box">
-                $$ F_M = S (\omega \times v_r), \quad S \approx \frac{\pi}{8} \rho_a d^3 C_M $$
-            </div>
-            <p>Spin parameter: $$ S_p = \frac{2 v \omega d}{1} $$</p>
-            <p>Example: baseball $$ d = 0.074\,\text{m}, \omega \sim 200 \,\text{rad/s}, v = 40\,\text{m/s} \implies F_M \sim 0.4\,\text{N} $$</p>
-        </section>
+                    <h3>2. Aerodynamic Drag</h3>
+                    <p><strong>Aerodynamic drag:</strong></p>
+                    <div class="math-block">$$ F_a = -\frac{1}{2} \rho_a C_D A |v_r| v_r $$</div>
+                    <p>Drag-to-weight ratio:
+                    $$ \epsilon_d = \frac{F_d}{mg} = \frac{\rho_a C_D A v^2}{2 m g} $$
+                    For a sphere:
+                    $$ \epsilon_d = \frac{3}{4} \frac{\rho_a}{\rho_p} \frac{C_D v^2}{g d} $$
+                    Failure onset: $$ \epsilon_d \gtrsim 0.01 $$</p>
 
-        <section>
-            <h2>4. Coupled Dynamics</h2>
-            <p>When drag and Magnus both present:</p>
-            <div class="equation-box">
-                $$ m \dot{v} = - m g \hat{y} - \frac{1}{2} \rho_a A C_D |v_r| v_r + S (\omega \times v_r) $$
-            </div>
-            <p>Spin decay:</p>
-            <div class="equation-box">
-                $$ I \dot{\omega} = - \kappa \rho_a d^5 |\omega| \omega $$
-            </div>
-            <p>Notes: System is coupled nonlinear ODEs. Separation of timescales can be applied if $$ \tau_\omega \gg t_f $$, otherwise likely chaotic for some initial conditions.</p>
-        </section>
+                    <h3>3. Magnus Effect</h3>
+                    <p><strong>Magnus lift (simplified):</strong></p>
+                    <div class="math-block">$$ F_m = \frac{1}{2} \rho_a C_L A |\omega| (\omega \times v_r) $$</div>
+                    <p>Spin parameter: $$ S_p = \frac{2 v \omega d}{1} $$</p>
 
-        <section>
-            <h2>5. Unresolved Technical Questions</h2>
-            <ul>
-                <li>Transonic Drag Parameterization: Can \( C_D(Ma, Re) \) be expressed as a universal function like \( Ma \cdot Re^{1/2} \) for non-spherical shapes?</li>
-                <li>Stochastic Atmospheric Modeling: For wind fluctuations \( \delta u(r,t) \) with spectrum \( E(k) \), what is \( \langle \delta r^2(t) \rangle \)? Can a Fokker-Planck approximation be used?</li>
-                <li>Boundary-Layer Interaction: Does rapid spin lower Re for turbulent transition? How does it affect \( C_M(S_p) \)?</li>
-                <li>Minimal Model for Bifurcations: Are there Hopf bifurcations producing oscillatory trajectories in 6D phase-space?</li>
-                <li>High-Altitude Rarefied Flow: For \( Kn > 0.1 \), can DSMC drag be approximated as \( F_d = -\frac{1}{2} \rho_a A v^2 [ C_D(0) + C_D(1) \cdot Kn + \dots ] \)?</li>
-                <li>Numerical Sensitivity: Does Lyapunov exponent scale as \( \lambda \sim v^\alpha d^\beta \) for deterministic prediction horizon?</li>
-            </ul>
-        </section>
+                    <h3>4. Coriolis + Centrifugal</h3>
+                    <div class="math-block">$$ F_c = - 2 m (\Omega \times \dot{r}) - m (\Omega \times (\Omega \times r)) $$</div>
+                    <p>Horizontal acceleration magnitude:
+                    $$ a_c \sim 2 \Omega v \sin\phi $$</p>
+
+                    <h3>5. Altitude-Dependent Gravity & Curvature</h3>
+                    <div class="math-block">$$ g(h) = g_0 \left( \frac{R_E}{R_E + h} \right)^2 $$</div>
+                    <p>Earth curvature effect over horizontal range \( R \):
+                    $$ \delta y_R \approx \frac{R^2}{2 R_E} $$</p>
+
+                    <h3>6. Coupled Dynamics & Unresolved Questions</h3>
+                    <p>When drag and Magnus both present:
+                    $$ m \dot{v} = - m g \hat{y} - \frac{1}{2} \rho_a A C_D |v_r| v_r + S (\omega \times v_r) $$
+                    System is coupled nonlinear ODEs. Separation of timescales can be applied if \( \tau_\omega \gg t_f \).</p>
+                </article>
+
+            </section>
+        </div>
     </main>
 
-    <footer>
-        <p>&copy; 2026 Abdullah Alif</p>
-    </footer>
-
+    <script src="script.js"></script>
 </body>
 </html>

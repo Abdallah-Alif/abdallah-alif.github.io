@@ -3,136 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abdullah Alif</title>
+    <title>Abdullah Alif | Theoretical Physics Research</title>
+    <meta name="description" content="Academic portfolio of Abdullah Alif.">
     <link rel="stylesheet" href="style.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Georgia&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+
     <style>
-        /* Modern Academic Overrides */
-        :root {
-            --accent-color: #A31F34; /* MIT Crimson */
-        }
-        
-        header {
-            margin-top: 10vh;
-            margin-bottom: 4rem;
-        }
+        /* --- INDEX SPECIFIC OVERRIDES --- */
 
-        h1 {
-            font-size: 3.5rem;
-            letter-spacing: -0.02em;
-            border: none;
-            margin-bottom: 0.5rem;
-        }
-
-        .tagline {
-            font-family: var(--font-body);
-            font-size: 1.1rem;
-            color: var(--accent-color);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            font-weight: 600;
-        }
-
-        .bio-lead {
-            font-family: var(--font-heading);
-            font-size: 1.5rem;
-            line-height: 1.4;
-            color: #111;
-            max-width: 750px;
+        /* 1. The Hero: Stark & Dominant */
+        .hero-section {
+            padding-top: 6rem;
+            padding-bottom: 2rem;
             margin-bottom: 3rem;
         }
 
-        .bio-sub {
-            font-size: 1.1rem;
+        .affiliation-badge {
+            display: inline-block;
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--text-meta);
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-subtle);
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+        }
+
+        .research-statement {
+            font-size: 1.8rem;
+            line-height: 1.35;
+            max-width: 800px;
+            color: var(--text-primary);
+            font-family: var(--font-serif);
+            margin: 1.5rem 0 2.5rem 0;
+            font-weight: normal;
+        }
+
+        /* 2. The Roadmap Note (HSC Update) */
+        /* Styled like a "System Log" to look technical and cool */
+        .roadmap-notice {
+            font-family: 'JetBrains Mono', monospace; /* Monospaced for dev feel */
+            font-size: 0.85rem;
+            background: #f4f4f4;
+            padding: 1.2rem;
+            border-left: 3px solid var(--text-primary);
+            color: var(--text-body);
             max-width: 650px;
-            color: #555;
-            margin-bottom: 4rem;
+            margin-bottom: 3rem;
+            line-height: 1.6;
         }
 
-        .cta-group {
+        .roadmap-label {
+            font-weight: bold;
+            color: var(--link-academic);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* 3. The "Command" Links */
+        .link-grid {
             display: flex;
             gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .external-btn {
+            display: inline-flex;
             align-items: center;
-        }
-
-        .btn-primary {
-            background: #111;
-            color: #fff;
+            text-decoration: none;
+            font-family: var(--font-sans);
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            border: 1px solid var(--border-strong);
             padding: 0.8rem 1.5rem;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: 0.2s;
+            transition: all 0.2s ease;
         }
 
-        .btn-primary:hover {
-            background: var(--accent-color);
+        .external-btn:hover {
+            background: var(--text-primary);
             color: #fff;
-        }
-
-        .contact-minimal {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .contact-minimal a {
-            color: #777;
-            text-decoration: none;
-            font-size: 0.9rem;
-            border-bottom: 1px solid transparent;
-        }
-
-        .contact-minimal a:hover {
-            color: #111;
-            border-bottom: 1px solid #111;
+            border-color: var(--text-primary);
+            transform: translateY(-2px);
         }
 
         @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .bio-lead { font-size: 1.2rem; }
+            .hero-section { padding-top: 3rem; }
+            .research-statement { font-size: 1.4rem; }
+            .link-grid { flex-direction: column; width: 100%; }
+            .external-btn { width: 100%; justify-content: center; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <ul>
-            <li><a href="index.html" class="active">Home</a></li>
-            <li><a href="research.html">Research</a></li>
-            <li><a href="notes.html">Notes</a></li>
-        </ul>
+        <div class="nav-container">
+            <a href="index.html" class="site-identity">A. ALIF / RESEARCH</a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Overview</a></li>
+                <li><a href="research.html">Publications</a></li>
+                <li><a href="notes.html">Notes Library</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <main class="container">
+    <main class="container fade-in">
         
-        <header>
-            <p class="tagline">Independent Researcher</p>
-            <h1>Abdullah Alif</h1>
+        <header class="hero-section">
+            <span class="affiliation-badge">Theoretical Physics & Dynamics</span>
+            <h1 style="margin-bottom: 0; font-size: 4.2rem; letter-spacing: -0.04em; margin-top: 1.5rem;">Abdullah Alif</h1>
+            
+            <p class="research-statement">
+                Investigating the edge cases of classical mechanics. My work focuses on the breakdown of ideal kinematic models in high-drag regimes, non-inertial frames, and variable-mass systems.
+            </p>
         </header>
 
-        <section>
-            <p class="bio-lead">
-                Exploring the intersections of classical mechanics and theoretical physics through rigorous derivation and analysis.
-            </p>
-            
-            <p class="bio-sub">
-                It's just a start , I will Upgrade the site with many more notes SOON that will help in HSC physics too!
+        <div class="roadmap-notice">
+            <span class="roadmap-label">:: Site Status Update ::</span>
+            It's just a start. I will upgrade the site with many more notes <strong>SOON</strong> that will help in HSC physics too.
+        </div>
 
-            <div class="cta-group">
-                <a href="https://abdullahalif.com/alif" class="btn-primary">About</a>
-                <div class="contact-minimal">
-                    <a href="mailto:alif.physics@outlook.com">Email</a>
-                    <a href="https://linkedin.com/in/abdullah-alif" target="_blank">LinkedIn</a>
-                </div>
-            </div>
-        </section>
+        <div class="link-grid">
+            <a href="https://abdullahalif.com/alif" target="_blank" class="external-btn">
+                About ↗
+            </a>
+            <a href="https://www.linkedin.com/in/abdullah-alif/" target="_blank" class="external-btn">
+                LinkedIn Profile ↗
+            </a>
+            <a href="mailto:alif.physics@outlook.com" class="external-btn">
+                Contact
+            </a>
+        </div>
 
     </main>
 
-    <footer>
-        <p>&copy; 2026 Abdullah Alif &bull; Built with ❤️! </p>
+    <footer style="margin-top: 8rem; padding: 3rem 0; border-top: 1px solid var(--border-subtle); text-align: center; color: var(--text-meta); font-size: 0.8rem; font-family: var(--font-sans);">
+        <p>&copy; 2026 Abdullah Alif. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; opacity: 0.6;">
+            Created on 24 Nov 2024.
+        </p>
     </footer>
 
+    <script src="script.js"></script>
 </body>
-
 </html>
-
